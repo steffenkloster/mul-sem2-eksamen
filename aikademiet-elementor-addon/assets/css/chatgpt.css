@@ -1,0 +1,40 @@
+.chat-gpt {
+  width: 100%;
+  color: white;
+  
+  font-family: ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif,Helvetica Neue,Arial,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
+}
+
+.chat-gpt .content {
+  max-width: 48rem;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  gap: 1.5rem;
+  padding: 1.5rem;
+}
+
+.chat-gpt .content p {
+  margin-bottom: 0 !important;
+}
+
+.chat-gpt .sender {
+  width: 30px;
+  min-width: 30px;
+  height: 30px;
+  min-height: 30px;
+  border-radius: 3px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chat-gpt .message:nth-child(odd) {
+  background-color: #343541;
+  color: #ECECF1;
+}
+.chat-gpt .message:nth-child(even) {
+  background-color: #444654;
+  color: #D1D5DA;
+}

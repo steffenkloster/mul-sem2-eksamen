@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://aikademiet.dk/wp-content/uploads/2023/05/quiz.css"
+    />
+  </head>
+  <!-- text-red-600 text-green-600 -->
+  <body class="bg-stone-100 p-12">
+    <div class="quiz bg-white mx-auto p-12 max-w-screen-md flex flex-col gap-4">
+      <header
+        class="flex w-full justify-between items-center text-xl sm:text-2xl"
+      >
+        <h1 class="font-medium">Quiz om AI</h1>
+        <div class="timer font-mono">00:00</div>
+      </header>
+
+      <div class="content flex-col gap-y-4 hidden">
+        <div class="question">...</div>
+        <label
+          class="bg-blue-50 text-black py-3 px-4 text-left rounded-md border-blue-300 border flex gap-x-4 cursor-pointer checked:border-4"
+        >
+          <div class="flex-grow option">Svar 1</div>
+          <input type="radio" name="answer" value="1" title="Svar 1" />
+        </label>
+        <label
+          class="bg-blue-50 text-black py-3 px-4 text-left rounded-md border-blue-300 border flex gap-x-4 cursor-pointer"
+        >
+          <div class="flex-grow option">Svar 2</div>
+          <input type="radio" name="answer" value="2" title="Svar 2" />
+        </label>
+        <label
+          class="bg-blue-50 text-black py-3 px-4 text-left rounded-md border-blue-300 border flex gap-x-4 cursor-pointer"
+        >
+          <div class="flex-grow option">Svar 3</div>
+          <input type="radio" name="answer" value="3" title="Svar 3" />
+        </label>
+        <label
+          class="bg-blue-50 text-black py-3 px-4 text-left rounded-md border-blue-300 border flex gap-x-4 cursor-pointer"
+        >
+          <div class="flex-grow option">Svar 4</div>
+          <input type="radio" name="answer" value="4" title="Svar 4" />
+        </label>
+
+        <button
+          type="button"
+          class="bg-blue-600 text-white py-3 px-4 disabled:brightness-150 next-question"
+          disabled
+          onclick="answerQuestion();"
+        >
+          Næste spørgsmål
+        </button>
+
+        <div class="text-sm question-indicator">
+          Spørgsmål <span>0</span> ud af <span>0</span>
+        </div>
+      </div>
+
+      <div class="results flex flex-col gap-y-4 hidden">
+        <p></p>
+        <button type="button" class="bg-blue-600 text-white py-3 px-4">
+          ...
+        </button>
+      </div>
+
+      <div class="about flex flex-col gap-y-4">
+        <p>Velkommen til Aikademiet's AI-quiz</p>
+        <p>
+          Testen tager mellem 5-10 minutter at gennemføre, og du har maksimum 30
+          sekunder til at svare på hvert spørgsmål. Spørgsmålene omhandler emner
+          fra vores artikler om AI, primært rettet mod multimediedesignere.
+        </p>
+
+        <input
+          type="text"
+          name="name"
+          placeholder="Indtast fulde navn .."
+          onkeyup="this.parentElement.querySelector('button')[this.value == '' ? 'setAttribute' : 'removeAttribute']('disabled', '')"
+          class="p-4 border border-blue-600 rounded-md"
+        />
+
+        <button
+          type="button"
+          onclick="startQuiz();"
+          class="bg-blue-600 text-white py-3 px-4 start-quiz disabled:brightness-150"
+          disabled
+        >
+          Start quiz
+        </button>
+      </div>
+    </div>
+
+    <script src="https://aikademiet.dk/wp-content/uploads/2023/05/quiz.js"></script>
+    <script src="https://unpkg.com/pdf-lib@1.4.0"></script>
+    <script src="https://unpkg.com/@pdf-lib/fontkit@0.0.4"></script>
+    <script>
+      setInterval(() => {
+        const iframe = window.parent.document.querySelector("#quiz-frame");
+        if (!iframe) {
+          console.log("no iframe");
+          return;
+        }
+
+        console.log("height: " + document.body.clientHeight);
+        iframe.style.height = document.body.clientHeight;
+      }, 1000);
+    </script>
+  </body>
+</html>

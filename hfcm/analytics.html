@@ -1,0 +1,81 @@
+<!-- Google Tag Manager -->
+<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+
+	const defaultValues = {
+		'ad_storage': localStorage.getItem("ad_storage") ?? 'denied',
+		'analytics_storage': localStorage.getItem("analytics_storage") ?? 'denied'
+	};
+	
+	console.log(defaultValues);
+	gtag('consent', 'default', defaultValues);
+</script>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=GTM-MWHMHK7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+
+  gtag('js', new Date());
+  gtag('config', 'GTM-MWHMHK7');
+</script>
+
+<script>
+  /* funktion som venter på, at elementer bliver tilgængelige/synlige på siden, da denne kode kører i <head> tagget. */
+	function waitForElm(selector) {
+    return new Promise(resolve => {
+        if (document.querySelector(selector)) {
+            return resolve(document.querySelector(selector));
+        }
+
+        const observer = new MutationObserver(mutations => {
+            if (document.querySelector(selector)) {
+                resolve(document.querySelector(selector));
+                observer.disconnect();
+            }
+        });
+
+        observer.observe(document, {
+            childList: true,
+            subtree: true
+        });
+    });
+	}
+	
+  /* googles produkter tilbyder automatisk konfiguration ift. privatliv og GDPR,
+  ved hjælp af deres "Consent Mode". da vores GDPR/Cookie plugin Complainz tager penge for denne
+  feature, implementerer vi den selv, ved at hooke os på accept / gem knapperne. */
+	waitForElm('.cmplz-btn.cmplz-accept').then((elm) => {
+    elm.addEventListener('click', () => {
+			window.localStorage.setItem("ad_storage", 'granted');
+			window.localStorage.setItem("analytics_storage", 'granted');
+			
+			const update = {
+      	'ad_storage': 'granted',
+				'analytics_storage': 'granted'
+    	};
+			
+			console.log(update);
+			gtag('consent', 'update', update);
+		});
+	});
+	
+	waitForElm('.cmplz-btn.cmplz-save-preferences').then((elm) => {
+    elm.addEventListener('click', () => {
+			const analytics = document.querySelector('#cmplz-statistics-optin').checked ? 'granted' : 'denied';
+			const marketing = document.querySelector('#cmplz-marketing-optin').checked ? 'granted' : 'denied';
+			window.localStorage.setItem("ad_storage", marketing);
+			window.localStorage.setItem("analytics_storage", analytics);
+			
+			const update = {
+      	'ad_storage': marketing,
+				'analytics_storage': analytics
+    	};
+			
+			console.log(update);
+			gtag('consent', 'update', update);
+		});
+	});
+</script>
